@@ -15,6 +15,7 @@ RUN ./gradlew build -x test
 
 FROM eclipse-temurin:21-jdk AS runtime
 
+
 WORKDIR /app
 
 COPY --from=build /app/build/libs/*.jar app.jar
