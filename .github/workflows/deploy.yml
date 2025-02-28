@@ -38,11 +38,17 @@ jobs:
             echo "Fetching latest code..."
             git pull origin main 
             
+            echo "Checking if .env.prod exists..."
+            if [ ! -f "/home/ubuntu/umb-kosa-api/.env.prod" ]; then
+              echo ".env.prod file not found! Exiting..."
+              exit 1
+            fi
+            
             echo "Stopping existing containers..."
-            docker compose --env-file ~/umb-kosa-api/.env.prod -f ~/umb-kosa-api/docker-compose.prod.yml down
+            sudo docker compose --env-file /home/ubuntu/umb-kosa-api/.env.prod -f /home/ubuntu/umb-kosa-api/docker-compose.prod.yml down
             
             echo "Pulling latest image..."
-            docker pull kcdevdes/umb-kosa-api:latest
-
+            sudo docker pull kcdevdes/umb-kosa-api:latest
+            
             echo "Starting new container..."
-            docker compose --env-file ~/umb-kosa-api/.env.prod -f ~/umb-kosa-api/docker-compose.prod.yml up -d
+            sudo docker compose --env-file /home/ubuntu/umb-kosa-api/.env.prod -f /home/ubuntu/umb-kosa-api/docker-compose.prod.yml up -d
