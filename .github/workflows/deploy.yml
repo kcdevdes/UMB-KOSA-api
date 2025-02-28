@@ -33,16 +33,16 @@ jobs:
           username: ubuntu
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
-            cd /home/ubuntu/umb-kosa-api
+            cd ~/umb-kosa-api
 
             echo "Fetching latest code..."
             git pull origin main 
             
             echo "Stopping existing containers..."
-            docker compose --env-file /home/ubuntu/.env.prod -f /home/ubuntu/docker-compose.prod.yml down
+            docker compose --env-file ~/umb-kosa-api/.env.prod -f ~/umb-kosa-api/docker-compose.prod.yml down
             
             echo "Pulling latest image..."
             docker pull kcdevdes/umb-kosa-api:latest
 
             echo "Starting new container..."
-            docker compose --env-file /home/ubuntu/.env.prod -f /home/ubuntu/docker-compose.prod.yml up -d
+            docker compose --env-file ~/umb-kosa-api/.env.prod -f ~/umb-kosa-api/docker-compose.prod.yml up -d
