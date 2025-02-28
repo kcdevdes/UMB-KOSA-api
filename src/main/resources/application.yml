@@ -1,11 +1,7 @@
 spring:
   application:
     name: UMB-KOSA-api
-  datasource:
-    url: jdbc:postgresql://postgres:5432/kosa
-    username: kosa_user
-    password: kosa_password
-    driver-class-name: org.postgresql.Driver
+
   jpa:
     hibernate:
       ddl-auto: update

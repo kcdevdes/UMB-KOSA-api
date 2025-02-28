@@ -38,3 +38,11 @@ out/
 
 ### Postgres ###
 pg_data/
+
+### Credential ###
+/keys
+.env
+.env.prod
+
+### MAC ###
+.DS_Store

@@ -20,3 +20,24 @@ jobs:
         run: |
           docker build -t kcdevdes/umb-kosa-api:latest .
           docker push kcdevdes/umb-kosa-api:latest
+
+  deploy:
+    needs: build-and-push
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Connect to EC2 and Deploy
+        uses: appleboy/ssh-action@v0.1.16
+        with:
+          host: ${{ secrets.EC2_PUBLIC_IP }}
+          username: ubuntu
+          key: ${{ secrets.EC2_SSH_KEY }}
+          script: |
+            echo "Stopping existing containers..."
+            docker-compose --env-file /home/ubuntu/.env.prod -f /home/ubuntu/docker-compose.prod.yml down
+            
+            echo "Pulling latest image..."
+            docker pull kcdevdes/umb-kosa-api:latest
+
+            echo "Starting new container..."
+            docker-compose --env-file /home/ubuntu/.env.prod -f /home/ubuntu/docker-compose.prod.yml up -d

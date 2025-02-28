@@ -1,25 +1,5 @@
 services:
-  postgres:
-    image: postgres:latest
-    container_name: kosa_postgres
-    restart: always
-    environment:
-      POSTGRES_DB: kosa
-      POSTGRES_USER: kosa_user
-      POSTGRES_PASSWORD: kosa_password
-    ports:
-      - "5432:5432"
-    volumes:
-      - ./pg_data:/var/lib/postgresql/data
-
   app:
     build: .
     container_name: kosa_api
     restart: always
-    depends_on:
-      - postgres
-    ports:
-      - "8080:8080"
-
-volumes:
-  pg_data:

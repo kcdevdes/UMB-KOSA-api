@@ -1,0 +1,9 @@
+services:
+  app:
+    image: kcdevdes/umb-kosa-api:latest
+    container_name: kosa_api_prod
+    restart: always
+    ports:
+      - "${SPRING_SERVER_PORT}:${SPRING_SERVER_PORT}"
+    env_file:
+      - /home/ubuntu/.env.prod
