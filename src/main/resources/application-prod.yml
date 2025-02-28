@@ -6,4 +6,4 @@ spring:
     driver-class-name: org.postgresql.Driver
 
 server:
-  port: ${SPRING_SERVER_PORT}
+  port: 80
