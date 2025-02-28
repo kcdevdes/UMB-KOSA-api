@@ -6,4 +6,4 @@ services:
     ports:
       - "${SPRING_SERVER_PORT}:${SPRING_SERVER_PORT}"
     env_file:
-      - /home/ubuntu/.env.prod
+      - .env.prod
