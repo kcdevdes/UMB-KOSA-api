@@ -45,10 +45,10 @@ jobs:
             fi
             
             echo "Stopping existing containers..."
-            sudo docker compose --env-file /home/ubuntu/umb-kosa-api/.env.prod -f /home/ubuntu/umb-kosa-api/docker-compose.prod.yml down
+            sudo docker compose --env-file /home/ubuntu/umb-kosa-api/.env.prod -f /home/ubuntu/umb-kosa-api/docker-compose.yml -f /home/ubuntu/umb-kosa-api/docker-compose.prod.yml down
             
             echo "Pulling latest image..."
             sudo docker pull kcdevdes/umb-kosa-api:latest
-            
+
             echo "Starting new container..."
-            sudo docker compose --env-file /home/ubuntu/umb-kosa-api/.env.prod -f /home/ubuntu/umb-kosa-api/docker-compose.prod.yml up -d
+            sudo docker compose --env-file /home/ubuntu/umb-kosa-api/.env.prod -f /home/ubuntu/umb-kosa-api/docker-compose.yml -f /home/ubuntu/umb-kosa-api/docker-compose.prod.yml up -d
