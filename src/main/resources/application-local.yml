@@ -1,9 +1,9 @@
 spring:
   datasource:
-    url: ${SPRING_DATASOURCE_URL}
-    username: ${SPRING_DATASOURCE_USERNAME}
-    password: ${SPRING_DATASOURCE_PASSWORD}
+    url: jdbc:postgresql://postgres:5432/kosa
+    username: kosa_user
+    password: my_secure_password
     driver-class-name: org.postgresql.Driver
 
 server:
-  port: ${SPRING_SERVER_PORT}
+  port: 8080
