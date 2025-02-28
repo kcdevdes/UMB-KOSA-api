@@ -27,7 +27,7 @@ jobs:
 
     steps:
       - name: Connect to EC2 and Deploy
-        uses: appleboy/ssh-action@v0.1.16
+        uses: appleboy/ssh-action@v1.2.1
         with:
           host: ${{ secrets.EC2_PUBLIC_IP }}
           username: ubuntu
