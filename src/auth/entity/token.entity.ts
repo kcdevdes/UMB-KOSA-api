@@ -12,9 +12,9 @@ export class Token {
   @ManyToOne(() => User, { eager: true })
   user: User;
 
-  @Column({ type: 'timestamp' })
+  @Column({ name: 'created_at', type: 'timestamp' })
   createdAt: Date;
 
-  @Column({ type: 'timestamp' })
+  @Column({ name: 'expires_at', type: 'timestamp' })
   expiresAt: Date;
 }

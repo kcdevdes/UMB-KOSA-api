@@ -27,16 +27,16 @@ export class User extends BaseEntity {
   @Column({ type: 'text', nullable: true })
   bio?: string;
 
-  @Column({ type: 'timestamp', nullable: true })
+  @Column({ name: 'last_login_at', type: 'timestamp', nullable: true })
   lastLoginAt?: Date;
 
   @Column({ type: 'enum', enum: USER_STATUS, default: USER_STATUS.ACTIVE })
   status: USER_STATUS;
 
-  @Column({ type: 'text', nullable: true })
+  @Column({ name: 'profile_image_url', type: 'text', nullable: true })
   profileImageUrl?: string;
 
-  @DeleteDateColumn({ type: 'timestamp', nullable: true })
+  @DeleteDateColumn({ name: 'deleted_at', type: 'timestamp', nullable: true })
   deletedAt?: Date;
 
   @OneToMany(() => Token, (token) => token.user)
