@@ -19,7 +19,7 @@ async function bootstrap() {
     user: configService.get<string>('DATABASE_USERNAME'),
     password: configService.get<string>('DATABASE_PASSWORD'),
     database: configService.get<string>('DATABASE_DB'),
-    ssl: { rejectUnauthorized: false }, // SSL connection
+    ssl: process.env.NODE_ENV === 'prod' && { rejectUnauthorized: false }, // SSL connection
   });
 
   // Create session table if not exists

@@ -10,6 +10,7 @@ import { UserModule } from './user/user.module';
 import { Token } from './auth/entity/token.entity';
 import { APP_INTERCEPTOR } from '@nestjs/core';
 import { ResponseInterceptor } from './config/interceptor/response.interceptor';
+import { PrometheusModule } from '@willsoto/nestjs-prometheus';
 
 @Module({
   imports: [
@@ -30,13 +31,14 @@ import { ResponseInterceptor } from './config/interceptor/response.interceptor';
         database: configService.get<string>('DATABASE_DB'),
         entities: [User, Token],
         synchronize: process.env.NODE_ENV !== 'prod', // false for Production
-        extra: {
+        extra: process.env.NODE_ENV === 'prod' && {
           ssl: {
             rejectUnauthorized: false,
           },
         },
       }),
     }),
+    PrometheusModule.register(),
     UserModule,
     AuthModule,
   ],
