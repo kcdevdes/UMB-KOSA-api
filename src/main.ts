@@ -25,6 +25,12 @@ async function bootstrap() {
   // Create session table if not exists
   createSessionTable(pgPool);
 
+  // CORS settings for Next.js frontend
+  app.enableCors({
+    origin: 'https://umbkosa.org',
+    credentials: true,
+  });
+
   app.use(
     session({
       store: new (PgSession(session))({
@@ -39,6 +45,7 @@ async function bootstrap() {
         httpOnly: true,
         secure: process.env.NODE_ENV === 'prod',
         maxAge: 1000 * 60 * 60 * 24 * 30,
+        sameSite: 'none', // CORS settings for Next.js frontend
       },
     }),
   );
