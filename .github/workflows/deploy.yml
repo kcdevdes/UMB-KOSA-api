@@ -37,7 +37,7 @@ jobs:
             docker stop umb-kosa-api || true
             docker rm umnb-kosa-api || true
             docker run -d -p 80:80 \
-              --name kosa-api-container \
+              --name umb-kosa-api \
               --env-file ~/.env.prod \
               -v ~/.env.prod:/app/.env.prod \
               ${{ secrets.DOCKER_USERNAME }}/umb-kosa-api:latest
