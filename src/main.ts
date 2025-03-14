@@ -31,6 +31,12 @@ async function bootstrap() {
     credentials: true,
   });
 
+  // Proxy settings for AWS
+  app.use((req, res, next) => {
+    req.app.set('trust proxy', 1);
+    next();
+  });
+
   app.use(
     session({
       store: new (PgSession(session))({
