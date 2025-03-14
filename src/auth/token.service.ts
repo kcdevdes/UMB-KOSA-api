@@ -40,7 +40,6 @@ export class TokenService {
 
   async deletToken(token: string): Promise<void> {
     // Delete the token after it has been used
-    // await this.tokenRepository.delete(tokenEntity);
     await this.tokenRepository.delete({ token });
   }
 }
