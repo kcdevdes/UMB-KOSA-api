@@ -1,4 +1,4 @@
-import { BadRequestException, Injectable } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { UserService } from 'src/user/user.service';
 import { EmailService } from './email.service';
 import { TokenService } from './token.service';
@@ -51,6 +51,9 @@ export class AuthService {
     if (!tokenEntity) {
       throw new InvalidTokenException();
     }
+
+    // Delete the token after it has been used
+    await this.tokenService.deletToken(token);
 
     return tokenEntity.user;
   }
