@@ -14,7 +14,7 @@ import { ResponseInterceptor } from './config/interceptor/response.interceptor';
 @Module({
   imports: [
     ConfigModule.forRoot({
-      envFilePath: process.env.NODE_ENV === 'prod' ? `.env.prod` : '.env',
+      envFilePath: process.env.NODE_ENV === 'prod' ? `/app/.env.prod` : '.env',
       load: [configuration],
       isGlobal: true,
     }),
