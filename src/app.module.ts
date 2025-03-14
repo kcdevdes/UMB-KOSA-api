@@ -30,6 +30,11 @@ import { ResponseInterceptor } from './config/interceptor/response.interceptor';
         database: configService.get<string>('DATABASE_DB'),
         entities: [User, Token],
         synchronize: process.env.NODE_ENV !== 'prod', // false for Production
+        extra: {
+          ssl: {
+            rejectUnauthorized: false,
+          },
+        },
       }),
     }),
     UserModule,
