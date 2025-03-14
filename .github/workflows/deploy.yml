@@ -35,7 +35,7 @@ jobs:
           script: |
             docker pull ${{ secrets.DOCKER_USERNAME }}/umb-kosa-api:latest
             docker stop umb-kosa-api || true
-            docker rm umnb-kosa-api || true
+            docker rm umb-kosa-api || true
             docker run -d -p 80:80 \
               --name umb-kosa-api \
               --env-file ~/.env.prod \
