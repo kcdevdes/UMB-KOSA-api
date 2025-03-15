@@ -49,7 +49,7 @@ async function bootstrap() {
       // 30 days
       cookie: {
         httpOnly: true,
-        secure: true,
+        secure: process.env.NODE_ENV === 'prod',
         maxAge: 1000 * 60 * 60 * 24 * 30,
         sameSite: 'none', // CORS settings for Next.js frontend
       },
