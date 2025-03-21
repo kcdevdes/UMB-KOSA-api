@@ -34,4 +34,13 @@ export class UserService {
   async findOneByEmail(email: string): Promise<User | null> {
     return this.userRepository.findOne({ where: { email } });
   }
+
+  async updateUser(id: string, data: Partial<User>): Promise<User> {
+    await this.userRepository.update(id, data);
+    return this.findOneById(id);
+  }
+
+  async deleteUser(id: string): Promise<void> {
+    await this.userRepository.delete(id);
+  }
 }
