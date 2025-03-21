@@ -5,6 +5,7 @@ import { ConfigService } from '@nestjs/config';
 import * as passport from 'passport';
 import { Pool } from 'pg';
 import * as PgSession from 'connect-pg-simple';
+import { ValidationPipe } from '@nestjs/common';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -49,7 +50,7 @@ async function bootstrap() {
       // 30 days
       cookie: {
         httpOnly: true,
-        secure: true,
+        secure: process.env.NODE_ENV === 'prod',
         maxAge: 1000 * 60 * 60 * 24 * 30,
         sameSite: 'none', // CORS settings for Next.js frontend
       },
@@ -58,6 +59,14 @@ async function bootstrap() {
 
   app.use(passport.initialize());
   app.use(passport.session());
+
+  app.useGlobalPipes(
+    new ValidationPipe({
+      whitelist: true, // Delete Columns that are not defined in DTO
+      forbidNonWhitelisted: true, // Return Error when Columns that are not defined in DTO
+      transform: true,
+    }),
+  );
 
   await app.listen(process.env.SERVER_PORT);
 }

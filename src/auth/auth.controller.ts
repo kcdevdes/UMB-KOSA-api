@@ -8,19 +8,11 @@ import {
   Query,
   Req,
   Res,
-  UnauthorizedException,
 } from '@nestjs/common';
 import { Request } from 'express';
 import { AuthService } from './auth.service';
 import UserResponseDto from 'src/user/dto/user.response.dto';
-import { User } from '../user/entity/user.entity';
 import LoginRequestDto from './dto/login.request.dto';
-
-declare module 'express-session' {
-  interface Session {
-    user: User;
-  }
-}
 
 @Controller('auth')
 export class AuthController {
@@ -41,6 +33,7 @@ export class AuthController {
     }
     const user = await this.authService.validateToken(token);
     req.session.user = user;
+    req.session.save();
 
     return new UserResponseDto(user);
   }
@@ -54,14 +47,5 @@ export class AuthController {
       res.clearCookie('connect.sid');
       res.send();
     });
-  }
-
-  @Get('me')
-  async me(@Req() req: Request) {
-    if (!req.session.user) {
-      throw new UnauthorizedException('Unauthorized Session Key');
-    }
-
-    return new UserResponseDto(req.session.user);
   }
 }
